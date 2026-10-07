@@ -1,0 +1,443 @@
+/* ==========================================
+   VARIÁVEIS DE COR E TEMA PADRONIZADO (CSS VARIABLES)
+   ========================================== */
+:root {
+  --bg-primary: #ffffff;
+  --color-blue: #1d4ed8;
+  --color-blue-hover: #1e40af;
+  --color-blue-light: #eff6ff;
+  --color-text: #1e293b;
+  --color-text-muted: #64748b;
+  --color-text-white: #ffffff;
+  --color-border: #cbd5e1;
+  --color-input-bg: #ffffff; /* Fundo do edit branco */
+  --color-power-black: #000000;
+  --radius-sm: 6px;
+  --radius-md: 10px;
+  --radius-lg: 16px;
+  --shadow-card: 0 10px 25px -5px rgba(0, 0, 0, 0.08);
+  --shadow-btn: 0 4px 14px rgba(29, 78, 216, 0.35);
+  --font-family: 'Segoe UI', -apple-system, BlinkMacSystemFont, Roboto, sans-serif;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: var(--font-family);
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* ==========================================
+   CONFIGURAÇÃO DE TELA CHEIA FIXA
+   ========================================== */
+body, html {
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  overflow: hidden !important;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: var(--bg-primary);
+  color: var(--color-text);
+  touch-action: manipulation;
+}
+
+/* ==========================================
+   TELA DE SPLASH (FULLSCREEN STRETCH 100%)
+   ========================================== */
+.splash-screen {
+  position: fixed;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  background-color: #000000;
+  background-image: url('./img/Splash.png');
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: 100% 100%; /* Stretch */
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  opacity: 1;
+  transition: opacity 0.5s ease-out, visibility 0.5s ease-out;
+}
+
+.splash-screen.hidden {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+}
+
+.splash-img {
+  width: 100%;
+  height: 100%;
+  object-fit: fill; /* Stretch */
+  object-position: center;
+}
+
+/* ==========================================
+   ESTRUTURA PRINCIPAL DO APLICATIVO
+   ========================================== */
+.app-viewport {
+  width: 100%;
+  max-width: 480px;
+  height: 100%;
+  margin: 0 auto;
+  background-color: var(--bg-primary);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  position: relative;
+  overflow: hidden;
+}
+
+/* ==========================================
+   TOPO DA PÁGINA (ALTURA FIXA 45PX, STRETCH)
+   ========================================== */
+.header-container {
+  flex-shrink: 0;
+  position: relative;
+  width: 100%;
+  /* Acomoda o Notch do iPhone (safe-area) somando aos 45px da imagem */
+  min-height: calc(45px + env(safe-area-inset-top, 0px));
+  padding-top: env(safe-area-inset-top, 0px);
+  overflow: hidden;
+  background-color: #ffffff;
+}
+
+.header-img {
+  width: 100%;
+  height: 45px;
+  display: block;
+  object-fit: fill; /* Stretch */
+  object-position: center;
+}
+
+/* Botão Desligar (45px x 45px com ícone de 33px) */
+.btn-power {
+  position: absolute;
+  bottom: 0; /* Alinha pelo final do container (junto com a imagem) */
+  left: 6px;
+  width: 45px;
+  height: 45px;
+  background: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  z-index: 10;
+  transition: transform 0.2s ease, opacity 0.2s ease;
+}
+
+.btn-power:active {
+  transform: scale(0.9);
+  opacity: 0.7;
+}
+
+.btn-power svg {
+  width: 33px;
+  height: 33px;
+  color: var(--color-power-black);
+  stroke: var(--color-power-black);
+  stroke-width: 3.5; /* Bold */
+}
+
+/* ==========================================
+   CORPO DE LOGIN (COM MARGEM SUPERIOR DE 150PX)
+   ========================================== */
+.login-body {
+  flex: 1;
+  padding: 150px 20px 0 20px; /* Margem superior de 150px */
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  overflow-y: auto;
+  background-color: var(--bg-primary);
+  -webkit-overflow-scrolling: touch;
+}
+
+.form-group {
+  margin-bottom: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.form-label {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--color-text-muted);
+}
+
+/* Fundo do Edit BRANCO */
+.form-input {
+  width: 100%;
+  height: 44px;
+  padding: 0 14px;
+  font-size: 0.95rem;
+  color: var(--color-text);
+  background-color: #ffffff !important;
+  border: 1.5px solid var(--color-border);
+  border-radius: var(--radius-md);
+  outline: none;
+  transition: all 0.2s ease;
+}
+
+.form-input:focus {
+  border-color: var(--color-blue);
+  background-color: #ffffff !important;
+  box-shadow: 0 0 0 3px rgba(29, 78, 216, 0.12);
+}
+
+/* Linha de Opções: Checkbox + Engrenagem */
+.options-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 16px;
+  padding: 2px 0;
+}
+
+.checkbox-container {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+  user-select: none;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--color-text);
+}
+
+.checkbox-container input[type="checkbox"] {
+  width: 18px;
+  height: 18px;
+  accent-color: var(--color-blue);
+  cursor: pointer;
+  border-radius: 4px;
+}
+
+/* Botão Engrenagem (settings.png) */
+.btn-gear {
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.2s ease;
+}
+
+.btn-gear:hover {
+  transform: rotate(30deg);
+}
+
+.btn-gear:active {
+  transform: rotate(60deg) scale(0.92);
+}
+
+.gear-img {
+  width: 30px;
+  height: 30px;
+  object-fit: contain;
+  display: block;
+}
+
+/* Botão Azul de Entrar */
+.btn-submit {
+  width: 100%;
+  height: 46px;
+  background-color: var(--color-blue);
+  color: var(--color-text-white);
+  font-size: 1rem;
+  font-weight: 700;
+  border: none;
+  border-radius: var(--radius-md);
+  cursor: pointer;
+  box-shadow: var(--shadow-btn);
+  transition: all 0.2s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.btn-submit:hover {
+  background-color: var(--color-blue-hover);
+}
+
+.btn-submit:active {
+  transform: scale(0.98);
+}
+
+/* Container da Imagem versao.png (50px abaixo do botão) */
+.version-container {
+  margin-top: 50px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+}
+
+.version-img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+  object-fit: contain;
+}
+
+/* ==========================================
+   RODAPÉ (IMAGEM BOTTON.PNG - ALTURA FIXA 42PX, STRETCH)
+   ========================================== */
+.footer-container {
+  flex-shrink: 0;
+  position: relative;
+  width: 100%;
+  height: 42px;
+  background-color: transparent;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.footer-img {
+  width: 100%;
+  height: 42px;
+  display: block;
+  object-fit: fill; /* Stretch */
+}
+
+.footer-title {
+  position: absolute;
+  top: 0;
+  height: 42px;
+  display: flex;
+  align-items: center;
+  color: var(--color-text-white);
+  font-size: 0.95rem;
+  font-weight: 700;
+  text-align: center;
+  letter-spacing: 0.5px;
+  text-shadow: 0 2px 4px rgba(0,0,0,0.5);
+  pointer-events: none;
+  z-index: 5;
+}
+
+/* Configurações Modal */
+.settings-modal {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(4px);
+  z-index: 1000;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+}
+
+.settings-modal.active {
+  display: flex;
+}
+
+.modal-content {
+  background: var(--bg-primary);
+  border-radius: var(--radius-lg);
+  padding: 24px;
+  width: 100%;
+  max-width: 360px;
+  box-shadow: var(--shadow-card);
+}
+
+.modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16px;
+}
+
+.modal-title {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--color-text);
+}
+
+.btn-close-modal {
+  background: none;
+  border: none;
+  font-size: 1.5rem;
+  color: var(--color-text-muted);
+  cursor: pointer;
+}
+
+/* ==========================================
+   BANNER DE INSTRUÇÃO PARA IPHONE (SAFARI)
+   ========================================== */
+.ios-install-banner {
+  position: fixed;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: calc(100% - 32px);
+  max-width: 440px;
+  background: #1e293b;
+  color: #ffffff;
+  border: 1px solid #334155;
+  border-radius: 12px;
+  padding: 14px 16px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+  z-index: 10000;
+  transition: all 0.3s ease;
+}
+
+.ios-install-banner.hidden {
+  display: none !important;
+}
+
+.ios-banner-content {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.ios-banner-text {
+  font-size: 0.85rem;
+  line-height: 1.4;
+  color: #f1f5f9;
+}
+
+.ios-banner-text strong {
+  color: #60a5fa;
+}
+
+.ios-share-icon {
+  vertical-align: middle;
+  display: inline-block;
+}
+
+.btn-close-ios-banner {
+  background: transparent;
+  border: none;
+  color: #94a3b8;
+  font-size: 1.4rem;
+  cursor: pointer;
+  padding: 0 4px;
+  line-height: 1;
+}
+
+.btn-close-ios-banner:hover {
+  color: #ffffff;
+}
+
+

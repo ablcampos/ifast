@@ -1,0 +1,20 @@
+{
+  "name": "MPX Mobile",
+  "short_name": "MPX",
+  "description": "Aplicativo PWA MPX Mobile em Tela Cheia Sem Barra de Endereço",
+  "start_url": "./index.html",
+  "scope": "./",
+  "display": "standalone",
+  "display_override": ["standalone", "fullscreen", "minimal-ui"],
+  "background_color": "#ffffff",
+  "theme_color": "#1d4ed8",
+  "orientation": "portrait",
+  "icons": [
+    {
+      "src": "./img/Splash.png",
+      "sizes": "192x192 512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ]
+}

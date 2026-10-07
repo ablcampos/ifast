@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+  <title>MPX Mobile - Efetuar Login</title>
+
+  <!-- PWA & Mobile Fullscreen Metadata (Remove barras do navegador) -->
+  <link rel="manifest" href="manifest.json">
+  <meta name="theme-color" content="#1d4ed8">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="MPX Mobile">
+  <link rel="apple-touch-icon" href="./img/Splash.png">
+
+  <!-- Estilos CSS com Variáveis de Cor -->
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <!-- ==========================================
+       1. TELA DE SPLASH (FULLSCREEN STRETCH, MÍNIMO 1.5 SEGUNDOS)
+       ========================================== -->
+  <div id="splashScreen" class="splash-screen">
+    <img src="./img/Splash.png" alt="MPX Mobile Splash" class="splash-img">
+  </div>
+
+  <!-- ==========================================
+       2. ESTRUTURA PRINCIPAL DO APLICATIVO (PWA TELA CHEIA)
+       ========================================== -->
+  <div class="app-viewport">
+    
+    <!-- TOPO: IMAGEM TOPO.JPG (ALTURA FIXA 45PX, STRETCH) + BOTÃO DESLIGAR (45PX, BOLD) -->
+    <header class="header-container">
+      <img src="./img/topo.jpg" alt="Topo MPX" class="header-img">
+      
+      <!-- Botão Desligar (Preto, sem fundo, 50% maior) -->
+      <button id="btnPower" class="btn-power" title="Desligar Aplicativo" aria-label="Desligar Aplicativo">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="#000000" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M18.36 6.64a9 9 0 1 1-12.73 0"></path>
+          <line x1="12" y1="2" x2="12" y2="12"></line>
+        </svg>
+      </button>
+    </header>
+
+    <!-- CORPO: FORMULÁRIO DE LOGIN (MARGEM 150PX, FUNDO BRANCO) -->
+    <main class="login-body">
+      <form id="loginForm" autocomplete="on">
+        
+        <!-- Campo Edit: Nome (Fundo Branco) -->
+        <div class="form-group">
+          <label for="inputName" class="form-label">Nome do Usuário</label>
+          <input type="text" id="inputName" class="form-input" placeholder="Digite seu nome" required autocomplete="username">
+        </div>
+
+        <!-- Campo Edit: Login / Senha (Fundo Branco, esconde digitação com *) -->
+        <div class="form-group">
+          <label for="inputPassword" class="form-label">Senha / Login</label>
+          <input type="password" id="inputPassword" class="form-input" placeholder="Digite sua senha" required autocomplete="current-password">
+        </div>
+
+        <!-- Opções: Checkbox (Esquerda) + Engrenagem settings.png (Direita) -->
+        <div class="options-row">
+          <label class="checkbox-container" for="checkRemember">
+            <input type="checkbox" id="checkRemember">
+            <span>Sempre Lembrar Este Usuário</span>
+          </label>
+
+          <!-- Botão Engrenagem (Utilizando a imagem img/settings.png) -->
+          <button type="button" id="btnGear" class="btn-gear" title="Configurações do Aplicativo" aria-label="Configurações">
+            <img src="./img/settings.png" alt="Configurações" class="gear-img">
+          </button>
+        </div>
+
+        <!-- Botão Azul com texto em branco "Entrar" -->
+        <button type="submit" class="btn-submit">
+          Entrar
+        </button>
+
+        <!-- Figura versao.png (50px abaixo do botão Entrar) -->
+        <div class="version-container">
+          <img src="./img/versao.png" alt="Versão MPX Mobile" class="version-img">
+        </div>
+
+      </form>
+    </main>
+
+    <!-- RODAPÉ: IMAGEM BOTTON.PNG + TEXTO CENTRALIZADO EM BRANCO "Efetuar Login" -->
+    <footer class="footer-container">
+      <img src="./img/botton.png" alt="Rodapé MPX" class="footer-img">
+      <span class="footer-title">Efetuar Login</span>
+    </footer>
+
+  </div>
+
+  <!-- MODAL DE CONFIGURAÇÕES (ACIONADO PELA ENGRENAGEM) -->
+  <div id="settingsModal" class="settings-modal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3 class="modal-title">Configurações MPX</h3>
+        <button id="btnCloseModal" class="btn-close-modal">&times;</button>
+      </div>
+      <div style="font-size:0.9rem; color:#64748b; line-height:1.5;">
+        <p><strong>Versão do PWA:</strong> 1.0.2</p>
+        <p><strong>Modo:</strong> Tela Cheia (Fullscreen)</p>
+        <p style="margin-top:10px;">Opções de servidor e parâmetros do sistema MPX Mobile configurados.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- MODAL DE MENSAGENS GENÉRICO (Substitui o alert nativo) -->
+  <div id="messageModal" class="settings-modal">
+    <div class="modal-content" style="text-align: center; max-width: 320px;">
+      <div id="messageModalBody" style="font-size:1rem; color:#1e293b; line-height:1.5; white-space: pre-wrap; margin-bottom: 24px; margin-top: 10px;">
+      </div>
+      <button id="btnCloseMessageModal" class="btn-submit" style="height: 40px;">OK</button>
+    </div>
+  </div>
+
+  <!-- MODAL DE ATUALIZAÇÃO DISPONÍVEL -->
+  <div id="updateModal" class="settings-modal">
+    <div class="modal-content" style="text-align: center; max-width: 320px;">
+      <div style="font-size:1.1rem; color:#1e293b; font-weight: 700; margin-bottom: 12px;">
+        🚀 Nova Versão Disponível!
+      </div>
+      <div style="font-size:0.95rem; color:#64748b; line-height:1.5; margin-bottom: 24px;">
+        O aplicativo foi atualizado em segundo plano. Deseja aplicar a atualização agora?
+      </div>
+      <div style="display: flex; gap: 10px;">
+        <button id="btnCancelUpdate" class="btn-submit" style="background-color: #94a3b8; height: 40px; flex: 1;">Depois</button>
+        <button id="btnReloadApp" class="btn-submit" style="height: 40px; flex: 1;">Atualizar</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- BANNER DE INSTRUÇÕES PWA (ADICIONAR À TELA DE INÍCIO) -->
+  <div id="pwaInstallBanner" class="ios-install-banner hidden">
+    <div class="ios-banner-content">
+      <div id="pwaBannerText" class="ios-banner-text">
+        <!-- O texto será injetado via JavaScript dependendo se é iOS ou Android -->
+      </div>
+      <button id="btnClosePwaBanner" class="btn-close-ios-banner" title="Fechar">&times;</button>
+    </div>
+  </div>
+
+  <!-- Script Principal -->
+  <script src="app.js"></script>
+
+</body>
+</html>
