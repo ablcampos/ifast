@@ -2,11 +2,11 @@
    VARIÁVEIS DE COR E TEMA PADRONIZADO (CSS VARIABLES)
    ========================================== */
 :root {
-  --bg-primary: #ffffff;
+  --bg-primary: #ff0000; /* Fundo alterado para vermelho para teste de atualização */
   --color-blue: #1d4ed8;
   --color-blue-hover: #1e40af;
   --color-blue-light: #eff6ff;
-  --color-text: #1e293b;
+  --color-text: #ffffff; /* Texto branco para leitura no fundo vermelho */
   --color-text-muted: #64748b;
   --color-text-white: #ffffff;
   --color-border: #cbd5e1;
